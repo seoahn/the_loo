@@ -1,0 +1,117 @@
+\documentclass[aps,11pt]{revtex4}
+
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{dcolumn}
+
+\begin{document}
+
+\title{Capstone Project}
+
+\author{Seo Young Ahn}
+
+\affiliation{University of Utah, Department of Physics}
+
+
+\date{\today}
+
+
+\begin{abstract}
+This project analyzes the pulsation of the White Dwarf Star PG 1701+427. The purpose is the verify the information from the Whole Earth Telescope\cite{WET} project, through the means of Fourier analysis\cite{fft} of the data collected. And with this, we will compare the findings from the Whole Earth Telescope.
+\end{abstract}
+
+\maketitle
+
+\section{\label{sec:intr}Introduction}
+
+In the analysis of the data, we will be able to determine things such as the size, mass structure, and the rotation of the White Dwarf Star. In order to study the the collected data of PG 1707+427, we will need to figure out its pulse frequencies using Fourier Transform. Due to the incontinuity of the data given, we will also incorporate a window function to fill the lacking portions of the data.
+
+\subsection{\label{sec:expt} Experimental Method}
+
+We will be applying the Fourier Transformation and the Window Transformation onto the data that we recieved by Whole Earth Telescope through the means of the language Python\cite{Py} using the package, Numpy. It contains commands, which apply the mathematical application of the Fourier Transformation.  With both of the transformed data we will look at the peaks created and determine relevence and error/noise of the data\cite{Kawaler}.
+
+\subsection{\label{sec:expt}Numerical Method}
+The graphing of the data will be done by intensity v. time. This is done by using the package provided by python called matplotlib.pyplot\cite{Py}. This enables us to graph the transformed data, adjust the settings to our liking. We must note, it is not continuous at every given point of the dataset.
+To implement the Fourier Transformation, we use this equation\cite{fft}:
+\begin{equation}
+F = \int f(x)e^{-2ix\pi\omega}d\omega
+\end{equation}
+This will give us a sinusodial function, making it continuous rather than discrete, resulting in a new dataset, also to be graphed. 
+\begin{center}
+\begin{tabular}{c }
+1025-1175 microhertz\\
+1280-1430 microhertz\\
+2150-2350 microhertz\\
+2950-3050 microhertz\\
+\end{tabular}
+\end{center}
+Here we have the graphs of the selected ranges. We will then compare these ranges to the window function to determin noise and error.
+
+\subsection{\label{sec:expt} Results}
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3in]{GraphedData.pdf}
+}
+\caption{The data is is gathered over a period of six-hour to seventeen hour stretches per day for roughly two weeks. As a result, this is the data graphed over time without Fourier Transform. The data from Whole Earth Telescope is discontinuous as there are several flat lines with sudden jumps.}\label{fig:arb}
+\end{figure}
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3.0in]{all_freqpdf.png}
+}
+\caption{This figure shows the data that has been through the Fourier Transformation. Now it is continuous and we are able to analyze peaks.}\label{fig:arb}
+\end{figure}
+
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3.0in]{freqs1020-1175pdf.png}
+}
+\end{figure}
+
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3.0in]{freqs1280-1430pdf.png}
+}
+\end{figure}
+
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3.0in]{freqs2150-2350pdf.png}
+}
+\end{figure}
+
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3.0in]{freqs2950-3050pdf.png}
+}
+\caption{Here are the data of the peaks from the Fourier Transfomration at the respective frequencies.}
+\end{figure}
+
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3.0in]{FFTWindowpdf.png}
+}
+\caption{This is the Window function of the data. With this we can determine the what is useful and what is noise/error. Within this model, we see one peak, right at zero. It continues on with series of small, jagged peaks surrounding it. The smaller peaks that are surrounded by many jagged peaks are irrelevant to the data (noise).}\label{fig:arb}
+\end{figure}
+
+\begin{figure}[bp!]
+\centerline{
+\includegraphics[width=3.0in]{longs.pdf}
+}
+\caption{This figure is the longest continuous period of time of the data collected by the Whole Earth Telescope. We can use this to help us understand the key aspects of the star in comparison to the similarities to the wave function at the respective frequencies.}\label{fig:arb}
+\end{figure}
+\clearpage
+\subsection{\label{sec:expt} Discussion}
+When we compare the window function to the alotted data/peaks from the Fourier transform, we determine that much of these are noise. The only section that corresponded similarly to both the Fourier transformation and the window transformation were between the frequencies of 2150 and 2350.
+Even looking at the Fourier Transformation graphs, we see that the intensities at those given frequencies were the most prominent compared to all of the other frequencies. Also, when approaching low frequencies, they cannot be quite 'real' as we can then assume that they are noise.
+
+\subsection{\label{sec:expt} Conclusion}
+This experiment was to compare and assess the findings of the intensity data from the Whole Earth Telescope group for the White Dwarf Star p1701+427 through the means of Fourier Transform and the Window function. Using the We can use this to help us understand the key aspects of the star in comparison to the similarities to the wave function at the respective frequencie We observed the periods of pulsations to be at 333 and 450 seconds\cite{DeTar}. In conclusion, we were able to verify that the data findings from the Whole Earth Telescopein the findings in the S.D.~Kawler et al, Astronomy and Astrophysics 428 969 (2004) to be aligned to the experiment done.
+
+\begin{thebibliography}{99}
+\bibitem{WET}Whole Earth Telescope,{\em http://wet.physics.iastate.edu/}
+\bibitem{fft}Fourier Transform,{\em http://www.physics.utah.edu/~detar/phys6720/handouts/fourier-transform/fourier/}
+\bibitem{Kawaler}S.D.~Kawaler et al, Astronomy and Astrophysics {\bf 428},969 (2004).
+\bibitem{Py}Python Programing Language {\em https://en.wikipedia.org/wiki/Python-(programming-language)}
+\bibitem{DeTar} Data {\em http://www.physics.utah.edu/~detar/phys6720/handouts/ft-pg1707/ft-pg1707/node2.html}
+\end{thebibliography}
+\end{document}

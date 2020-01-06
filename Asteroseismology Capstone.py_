@@ -1,0 +1,82 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+t,MI,SD = map(np.array,zip(*[map(float,line.split()) for line in open('pg1707wet_bin60')]))
+dt = 60
+NFFT = 17914
+
+def fourier(data,dt=dt,NFFT=NFFT):
+    fftData=np.fft.fft(data)*dt
+    fmu = np.fft.fftfreq(NFFT,d=dt)*1E6
+    mtude=np.absolute(fftData)
+
+    return fftData,fmu,mtude
+plt.figure(figsize=(8,5))
+plt.plot(t,MI)
+plt.xlabel('Time(s)')
+plt.title("All Data")
+plt.savefig("GraphedData.ps")
+plt.show()
+
+def part1(EXT='.ps'):
+    fftMI,fmu,mtude = fourier(MI)
+    ranges = [None,[2950,3050],[2150,2350],[1280,1430],[1020,1175]]
+    for span in ranges:
+        plt.figure(figsize=8,5))
+        plt.plot(fmu,mtude)
+        plt.xlabel('Frequency($\mu Hz$)')
+        plt.ylabel('Intensity')
+        plt.ylim([0,2600])
+    if span is None:
+        plt.title('All Frequencies')
+        plt.savefig('all_freq%s'%EXT)
+    else:
+        plt.xlim(span)
+        plt.title('%d-%d $\\mu Hz$ Interesting Peak'%tuple(span))
+        plt.savefig(('freqs%d-%d'%tuple(span))+EXT)
+    plt.show()
+
+def part2(EXT='.ps'):
+    WF=np.fabs(MI)>0
+    fftWF,fmu,mtude=fourier(WF)
+    plt.figure(figsize=(8,5))
+    plt.plot(fmu,mtude,'g')
+    plt.xlabel('Frequency($\mu Hz$)')
+    plt.ylabel('Intensity')
+    plt.ylim([0,450000])
+    plt.xlim([-40,40])
+    plt.title("Window Function")
+    plt.savefig("FFTWindows%s"%EXT)
+    plt.show()
+
+def part3(EXT='.ps'):
+    maxrange=[0,0]
+    start=0
+    strikes=0
+    MAX_STRIKES=(60/dt)
+    for i,m in enumerate(MI):
+        if m==0:
+            strikes +=1
+        else:
+            strikes=0
+
+        if strikes>MAX_STRIKES or i+1 ==len(MI):
+            if i-start>maxrange[1]-maxrange[0]:
+                maxrange=[start,i]
+                print(i-start,'\t',maxrange)
+            start=i
+    data=MI[maxrange[0]:maxrange[1]]
+    print(maxrange)
+
+    fftData,fmu,mtude=fourier(data,dt,len(data))
+    plt.figure(figsize=(8,5))
+    plt.plot(fmu,mtude,'r')
+    plt.xlim([2150,2350])
+    plt.xlabel('Frequency($\mu Hz$)')
+    plt.ylabel('Intensity')
+    plt.title("Fourier Transform of Longest Continuous Stretch of Data")
+    plt.show()
+
+part1()
+part2()
+part3()
