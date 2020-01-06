@@ -1,0 +1,12 @@
+Answer
+a) 62 orion:assignments/a04> python3 truss.py
+[ 3500.         -4041.5704388   2020.7852194  -3464.20323326  2886.83602771
+  1732.10161663  2598.15242494 -5196.30484988  4500.        ]
+in the order of
+[RA, FAB, FAC, FBD, FBC, FCD, FCE, FDE, RE]
+
+The negative values means that it's under compression while the positive values represent tension.
+
+I dropped the last two equations
+
+b) It would snap at 4196 lbs because the max is 3000 in tension. I solved it by using the FBCsin60 + FCD sin60 -4000 = 0 equation through guessing and checking. But in place of 4000, I plugged in 4196. The force on FBC would fail first because it reached its max force of 3000 first. 
