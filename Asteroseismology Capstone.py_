@@ -1,3 +1,5 @@
+## Asteroseismology
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -18,6 +20,7 @@ plt.title("All Data")
 plt.savefig("GraphedData.ps")
 plt.show()
 
+## Fourier Transform Full Set
 def part1(EXT='.ps'):
     fftMI,fmu,mtude = fourier(MI)
     ranges = [None,[2950,3050],[2150,2350],[1280,1430],[1020,1175]]
@@ -36,6 +39,7 @@ def part1(EXT='.ps'):
         plt.savefig(('freqs%d-%d'%tuple(span))+EXT)
     plt.show()
 
+## Fourier Transform of Window Function
 def part2(EXT='.ps'):
     WF=np.fabs(MI)>0
     fftWF,fmu,mtude=fourier(WF)
@@ -49,6 +53,7 @@ def part2(EXT='.ps'):
     plt.savefig("FFTWindows%s"%EXT)
     plt.show()
 
+## Fourier Transform Longest Continuous stretch of Data
 def part3(EXT='.ps'):
     maxrange=[0,0]
     start=0
