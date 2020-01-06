@@ -1,0 +1,10 @@
+import numpy as np
+from numpy import linalg as LA
+
+A = np.loadtxt('g14')
+B = A*8.854187817*10**-12
+w, v = LA.eig(B)
+u = B[:, 0:13]
+j = B[: 0:13]
+x = sorted(w)
+print ("n dimensions are 14X14. The eigenvalues are: ", w)
