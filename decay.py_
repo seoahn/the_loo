@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+N = eval(input("Number of atoms? "))
+tau = eval(input("What is the lifetime? "))
+dt = eval(input("What is the simulation time interval? "))
+T = eval(input("Duration of the exeriment? "))
+seed = eval(input("Give random number to seed "))
+n = N
+np.random.seed(seed)
+L = int(T/dt)
+f = dt/tau
+TT = []
+SS = []
+XX = []
+for i in range(L+1):
+    s = 0
+    T = i*dt
+    for c in range(N):
+        r = np.random.random()
+        if r < f:
+            s = s + 1
+    SS.append(s)
+    N = N - s 
+    TT.append(T)
+    print("Time: ", T, "Decays: ", s)
+    x = n*dt/tau*np.exp(-T/tau)
+    XX.append(x)
+k = []
+K = []
+j=0
+for j in range(20):
+	k.append(j)	
+	d = n*dt/tau
+	Nk = T/dt*np.exp(-d)/math.factorial(j)
+	K.append(Nk)
+print(Nk)
+bin=[-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5,10.5,11.5,12.5,13.5,14.5,15.5,16.5,16.5,17.5,18.5,19.5,20.5]
+plt.hist(SS, bins=bin)
+plt.plot(k, K)
+plt.savefig("poisson.pdf")
+plt.show()
